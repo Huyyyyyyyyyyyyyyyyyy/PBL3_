@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>UPDATE CIY</h1>
+	<form th:action="@{/product/update}" method="post" th:object="${product}"  enctype="multipart/form-data">
+		<input th:field="*{id}" readonly />
+		<input th:field="*{name}" /> 
+		<input th:field="*{description}" /> 
+		<input th:field="*{price}"/>
+		<select name="categoryName">
+					<option th:text="*{categoryName}" th:value="*{categoryName}"/>
+					<th:block th:each="i : ${category}">
+					<option th:unless="${#strings.equals(product.categoryName, i)}" th:value="${i}" th:text="${i}"/>
+		</select>
+		<input type="hidden" th:field="*{image}" readonly >
+		<img id="oldImage"  width="100px" height="100px" th:src ="@{${product.ImagePath}}">
+		<input type="file" name="file" accept="image/png, image/jpeg" />
+		<input type="submit" value="Submit" />
+	</form>
+</body>
+</html>
